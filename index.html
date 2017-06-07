@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body ng-controller="mainCtrl">
@@ -11,10 +12,23 @@
       <form ng-submit="postMessage(message)">
         <input class="form-control text-box" type="text" ng-model="message" placeholder="Message">
       </form>
-      <div class="messages-container">
-        <p ng-repeat="message in messages ">
-          {{message.message}} </p>
+      <input class="form-control text-box filter-input" type="text" ng-model="filterText" placeholder="Filter">
+      <div class="messages-outlier">
+        <div class="messages-container">
+          <div ng-repeat="message in messages | filter: filterText">
+            <div class="message-box">
+              <i class="fa fa-comment fa-5x" aria-hidden="true"></i>
+              <div class="message-content">
+                <p>{{message.message}}</p> <br>
+                <p style="font-style: italic">{{message.createdAt | date: short}}</p>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
+
     </div>
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
